@@ -1,10 +1,15 @@
-const Blockchain = require('./BlockchainClasses/blockchain')
+const express = require("express");
+const http = require("http");
+const port = 8000;
+const app = express();
+const server = http.createServer(app);
+const cors = require('cors');
+const bodyParser = require("body-parser");
+const routes = require('./app/routes')
 
-const blockchain = new Blockchain()
+app.use(cors('*'));
+app.use(bodyParser.json())
 
-blockchain.addNewBlock({index: 1, timestamp: new Date(), data: {sender: 'Shashang', receipent: 'Someone', amount: '100'}})
-blockchain.addNewBlock({index: 2, timestamp: new Date(), data: {sender: 'Shashang', receipent: 'Someone', amount: '200'}})
-blockchain.addNewBlock({index: 3, timestamp: new Date(), data: {sender: 'Shashang', receipent: 'Someone', amount: '300'}})
+routes.declare(app);
 
-console.log(JSON.stringify(blockchain, null, 4));
-console.log(blockchain.checkChainValidity())
+server.listen(port, () => console.log(`Listening on port ${port}`));

@@ -10,7 +10,7 @@ class CryptoBlock{
 		this.proofOfWork(4);
 	}
 
-	calculateHash = () => {
+	calculateHash() {
 		return SHA256(this.index + this.precedingHash + this.timestamp + JSON.stringify(this.data) + this.nonce).toString();
 	}
 

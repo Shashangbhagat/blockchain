@@ -5,16 +5,20 @@ class Blockchain {
 		this.blockchain = [this.startGenesisBlock()];
 	}
 
-	startGenesisBlock = () => new CryptoBlock({index: 0, timestamp: new Date(), data: 'Initial Block', precedingHash: '0'});
+	startGenesisBlock() {
+		new CryptoBlock({index: 0, timestamp: new Date(), data: 'Initial Block', precedingHash: '0'});
+	}
+	getLatestBlock() {
+		this.blockchain[this.blockchain.length-1];
+	}
 
-	getLatestBlock = () => this.blockchain[this.blockchain.length-1];
-
-	addNewBlock = (newBlock) => {
+	addNewBlock (newBlock) {
 		newBlock.precedingHash = this.getLatestBlock().hash;
 		const newCryptoBlock = new CryptoBlock({...newBlock})
 		this.blockchain.push(newCryptoBlock);
 	}
-	checkChainValidity = () => {
+
+	checkChainValidity() {
 		for (let i = 1; i < this.blockchain.length; i++) {
 			const currentBlock = this.blockchain[i];
 			const precedingBlock = this.blockchain[i-1];

@@ -7,3 +7,4 @@ blockchain.addNewBlock({index: 2, timestamp: new Date(), data: {sender: 'Shashan
 blockchain.addNewBlock({index: 3, timestamp: new Date(), data: {sender: 'Shashang', receipent: 'Someone', amount: '300'}})
 
 console.log(JSON.stringify(blockchain, null, 4));
+console.log(blockchain.checkChainValidity())
